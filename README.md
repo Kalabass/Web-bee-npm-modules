@@ -1,1 +1,7 @@
-# Web-bee-npm-modules
+# Для запуска
+
+```
+cd .\npmModulesTest\
+npm i
+npm run dev
+```

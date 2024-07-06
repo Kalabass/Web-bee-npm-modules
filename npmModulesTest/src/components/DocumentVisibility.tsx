@@ -5,7 +5,7 @@ const DocumentVisibility: FC = () => {
 	const { count, visible, onVisibilityChange } = useDocumentVisibility();
 
 	useEffect(() => {
-		onVisibilityChange(isVisible => {
+		const unsubscribeFirstHandler = onVisibilityChange(isVisible => {
 			console.log("first handler", isVisible);
 		});
 
@@ -13,8 +13,15 @@ const DocumentVisibility: FC = () => {
 			console.log("second handler", isVisible);
 		});
 
-		setTimeout(() => unsubscribeSecondHandler(), 5000); // отписываемся от 'second handler' через 5 секунд
-	}, []);
+		const timerId = setTimeout(() => unsubscribeSecondHandler(), 5000);
+
+		return () => {
+			unsubscribeFirstHandler();
+			unsubscribeSecondHandler();
+			clearTimeout(timerId);
+		};
+	}, [onVisibilityChange]);
+
 	return (
 		<div>
 			<span>

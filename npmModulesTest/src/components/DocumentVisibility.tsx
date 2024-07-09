@@ -1,5 +1,5 @@
+import { useDocumentVisibility } from "@kalabass/react-use-document-visibility";
 import { FC, useEffect } from "react";
-import { useDocumentVisibility } from "../hooks/useDocumentVisibility";
 
 const DocumentVisibility: FC = () => {
   const { count, visible, onVisibilityChange } = useDocumentVisibility();

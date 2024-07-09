@@ -1,8 +1,8 @@
 import { FC } from "react";
-import DocumentVisibility from "./components/DocumentVisibility";
+import ReactResponsive from "./components/ReactResponsive";
 
 const App: FC = () => {
-  return <DocumentVisibility />;
+  return <ReactResponsive />;
 };
 
 export default App;

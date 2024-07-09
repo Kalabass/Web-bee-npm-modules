@@ -1,26 +1,40 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-interface useMediaQueryProps {
-	query: string;
+interface UseMediaQueryProps {
+  query: string | string[];
 }
-export const useMediaQuery = ({ query }: useMediaQueryProps): boolean => {
-	const [isMatching, setIsMatching] = useState(false);
 
-	useEffect(() => {
-		const mql = window.matchMedia(query);
+export const useMediaQuery = ({ query }: UseMediaQueryProps): boolean => {
+  const [isMatching, setIsMatching] = useState(() => {
+    if (Array.isArray(query)) {
+      return query.every((q) => window.matchMedia(q).matches);
+    }
+    return window.matchMedia(query).matches;
+  });
 
-		setIsMatching(mql.matches);
+  useEffect(() => {
+    const handleMatch = () => {
+      if (Array.isArray(query)) {
+        setIsMatching(query.every((q) => window.matchMedia(q).matches));
+      } else {
+        setIsMatching(window.matchMedia(query).matches);
+      }
+    };
 
-		const handleMatch = (e: MediaQueryListEvent) => {
-			setIsMatching(e.matches);
-		};
+    if (Array.isArray(query)) {
+      const mqlArr = query.map((q) => window.matchMedia(q));
+      mqlArr.forEach((mql) => mql.addEventListener("change", handleMatch));
+      return () => {
+        mqlArr.forEach((mql) => mql.removeEventListener("change", handleMatch));
+      };
+    } else {
+      const mql = window.matchMedia(query);
+      mql.addEventListener("change", handleMatch);
+      return () => {
+        mql.removeEventListener("change", handleMatch);
+      };
+    }
+  }, []);
 
-		mql.addEventListener('change', handleMatch);
-
-		return () => {
-			mql.removeEventListener('change', handleMatch);
-		};
-	}, [query]);
-
-	return isMatching;
+  return isMatching;
 };

@@ -1,8 +1,8 @@
-import { FC } from "react";
-import ReactResponsive from "./components/ReactResponsive";
+import { FC } from 'react';
+import ReactResponsive from './components/react-responsive';
 
 const App: FC = () => {
-  return <ReactResponsive />;
+	return <ReactResponsive />;
 };
 
 export default App;

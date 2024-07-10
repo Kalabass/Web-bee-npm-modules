@@ -1,5 +1,5 @@
+import { useMediaQuery } from "@kalabass/react-responsive";
 import { FC } from "react";
-import { useMediaQuery } from "../../hooks/UseMediaQuery";
 
 const HookExample: FC = () => {
   const isDesktopOrLaptop = useMediaQuery({
@@ -12,6 +12,7 @@ const HookExample: FC = () => {
   const isisDesktopOrLaptopAndLandscape = useMediaQuery({
     query: ["(min-width: 1224px)", "(orientation: landscape)"],
   });
+
   return (
     <div>
       <h1>Hook Device Test!</h1>

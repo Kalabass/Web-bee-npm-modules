@@ -1,5 +1,5 @@
+import MediaQuery from "@kalabass/react-responsive";
 import { FC } from "react";
-import MediaQuery from "./MediaQuery";
 
 const ComponentExample: FC = () => {
   return (

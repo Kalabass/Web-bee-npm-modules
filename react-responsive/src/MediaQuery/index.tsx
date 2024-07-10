@@ -1,9 +1,11 @@
 import { FC, ReactNode } from "react";
-import { useMediaQuery } from "../../hooks/UseMediaQuery";
+import { useMediaQuery } from "../UseMediaQuery";
+
+type ResolutionType = `${number}dppx` | number;
 interface MediaQueryProps {
   orientation?: "landscape" | "portrait";
-  minResolution?: `${number}dppx` | number;
-  maxResolution?: `${number}dppx` | number;
+  minResolution?: ResolutionType;
+  maxResolution?: ResolutionType;
   minWidth?: number;
   maxWidth?: number;
   minHeight?: number;

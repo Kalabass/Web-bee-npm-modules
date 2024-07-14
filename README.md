@@ -1,7 +1,4 @@
-# Для запуска
+для запуска:
 
-```
-cd .\npmModulesTest\
-npm i
-npm run dev
-```
+1. npm i
+2. npm run dev
